@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Random Quote Generator</title>
+<!--  Styling Here  -->
+  <style>
+    body{
+
+  font-size:1.5rem;
+  background-color:#7681b3;
+}
+
+.board{
+  margin: 3rem auto;
+  background-color: #a3d5ff;
+  color:#6f73d2;
+  width:20rem;
+  min-height:20rem;
+  display:flex;
+  flex-direction:column;
+ justify-content: space-between;
+  border-radius:20px;
+}
+.text{
+  padding:1rem;
+}
+
+.btn{
+  color:grey;
+  border:none;
+  background-color:#d9f0ff;
+  font-size: 1.5rem;
+  padding:10px;
+  cursor: pointer;
+}
+
+  </style>  
+</head>
+<body>
+<div class="board">
+  <div class="text">
+    <p class="quote"></p>
+    <h6 class="author"></h6>
+  </div>
+  <button class="btn">New Quote</button>
+</div>
+  
+<!--  Javascript here  -->
+  <script> 
+let quote = document.querySelector('.quote');
+let author = document.querySelector('.author');
+const btn = document.querySelector('.btn');
+
+
+const getQuote = function(){
+  fetch('https://api.quotable.io/random')
+  .then(res=>res.json())
+  .then(q=>{
+    quote.textContent = q.content;
+    author.textContent = q.author; 
+  })
+}
+window.addEventListener('load', getQuote)
+btn.addEventListener('click', getQuote);
+  </script>
+</body>
+</html>
